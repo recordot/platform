@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "ES2015",  
+      "module": "commonjs",   
+      "strict": true,   
+      "esModuleInterop": true,
+      "forceConsistentCasingInFileNames": true,
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true,
+      "baseUrl": ".",
+      "paths": {
+          "@app/*": ["src/app/*"],
+          "@domains/*": ["src/app/domains/*"],
+          "@entities/*": ["src/app/entities/*"],
+          "@controllers/*": ["src/http/controllers/*"],
+          "@http/*": ["src/http/*"],
+          "@infras/*": ["src/infras/*"],
+          "@impl/*": ["src/impl/*"],
+          "@orms/*": ["src/impl/orms/*"]
+      }
+  }
+}

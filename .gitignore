@@ -1,0 +1,10 @@
+node_modules
+out
+.jest
+coverage
+/db.sqlite3
+/ormconfig.ts
+/.env
+
+/envs/local/db
+/coverage

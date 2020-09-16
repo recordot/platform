@@ -1,0 +1,267 @@
+{
+	"info": {
+		"_postman_id": "41d37338-aeca-4646-ae98-7ffda075f716",
+		"name": "Hello world",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "hello world",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "305db059-5b65-4942-a9c6-783a13e66e99",
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{protocol}}://{{address}}:{{port}}/hello-world",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{address}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"hello-world"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "hello world anonymous",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c0e66a05-7ed9-45a4-b0b2-b795b7c534a8",
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{protocol}}://{{address}}:{{port}}/hello-world/tests/anonymous",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{address}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"hello-world",
+						"tests",
+						"anonymous"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "hello world no msg error",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e0a81e26-cd06-40b0-bd8f-1a3260685553",
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Status code is 500\", function () {",
+							"    pm.response.to.have.status(500);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{protocol}}://{{address}}:{{port}}/hello-world/tests/anonymous-throw-error-no-mssg",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{address}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"hello-world",
+						"tests",
+						"anonymous-throw-error-no-mssg"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "hello world msg error",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d6883468-6480-4ec1-b31c-dcec051349ae",
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Status code is 500\", function () {",
+							"    pm.response.to.have.status(500);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{protocol}}://{{address}}:{{port}}/hello-world/tests/anonymous-throw-error",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{address}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"hello-world",
+						"tests",
+						"anonymous-throw-error"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "hello world common error",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3f0eb49a-8114-4265-b658-7f1b0a65ba5a",
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{protocol}}://{{address}}:{{port}}/hello-world/tests/anonymous-throw-common-error",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{address}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"hello-world",
+						"tests",
+						"anonymous-throw-common-error"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "hello world return nothing",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "18a2d9e6-a320-408f-bf2b-5d9816a1d223",
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Status code is 500\", function () {",
+							"    pm.response.to.have.status(500);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{protocol}}://{{address}}:{{port}}/hello-world/tests/return-nothing",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{address}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"hello-world",
+						"tests",
+						"return-nothing"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "hello world fire event",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3a6d87d1-3c5d-4990-907f-fcf0a6186a58",
+						"exec": [
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{protocol}}://{{address}}:{{port}}/hello-world/tests/event",
+					"protocol": "{{protocol}}",
+					"host": [
+						"{{address}}"
+					],
+					"port": "{{port}}",
+					"path": [
+						"hello-world",
+						"tests",
+						"event"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
