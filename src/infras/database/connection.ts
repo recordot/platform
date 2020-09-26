@@ -3,6 +3,8 @@ import { createConnection, getConnectionOptions, getConnection, getManager, Enti
 function getName() {
   let name = "default";
   
+  console.log(process.env.NODE_ENV);
+  
   if (process.env.NODE_ENV) {
     name = process.env.NODE_ENV;
   } 

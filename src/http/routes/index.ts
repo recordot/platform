@@ -1,6 +1,6 @@
-import { Router } from '@recordot/http-core'
+import { Router, RouterGroup } from '@recordot/http-core'
 import DevAuthGroup from './groups/develop/DevAuthGroup'
-import HelloworldGroup from './groups/HelloWorld'
+import ServiceGroup from './groups/ServiceGroup'
 
 export const Routes:Array<Router> = [
     // ... HelloworldGroup,
@@ -8,4 +8,9 @@ export const Routes:Array<Router> = [
     // {
     //     route:'authenticateW'
     // }
+    // ... ServiceGroup
+]
+
+export const RouteGroups: Array<{new (...args: any[]): RouterGroup;}> = [
+    ServiceGroup
 ]

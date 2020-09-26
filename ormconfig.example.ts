@@ -16,7 +16,7 @@ const connectionOptions: ConnectionOptions[] = [
         type: "sqlite",
         database: "db.sqlite3",
         synchronize: true,
-        dropSchema: true, // Isolate each test case
+        dropSchema: false, // Isolate each test case
         entities
     },
     {

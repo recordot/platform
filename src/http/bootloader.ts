@@ -1,13 +1,14 @@
 import * as express from 'express';
 import * as bodyParser from "body-parser";
 import Middlewares from "./middlewares"
-import {Routes} from "./routes";
+import {Routes, RouteGroups} from "./routes";
 import ErrorHandlers from "./errors/handlers";
 import {connect as connectDB, close as closeDB } from "@infras/database/connection"
 import { NextFunction } from 'express';
 import dotenv from 'dotenv'
 import { injectable, IocContext } from 'power-di';
-import { Router, Middelware } from "@recordot/http-core";
+import { Router, Middelware, RouterGroup } from "@recordot/http-core";
+import bearerToken from "express-bearer-token";
 
 export class Bootloader {
 
@@ -32,6 +33,7 @@ export class Bootloader {
     loadMiddleware(){
 
         this.app.use(bodyParser.json());
+        this.app.use(bearerToken());
         
         Middlewares.forEach((middleware:Middelware)=> {
             if(middleware.route)
@@ -41,50 +43,58 @@ export class Bootloader {
         });
     }
 
+    protected routerInit(router:Router) {
+
+        const handle = (req: express.Request, res: express.Response, next: NextFunction) => {
+            let result = null;               
+            
+            if(typeof router.action === 'string') {
+                const ctrlr = IocContext.DefaultInstance.get((router as Router).controller);
+                result = ctrlr[router.action](req, res, next);
+            } else {
+                result = router.action(req, res, next);
+            }
+            
+            if (result instanceof Promise) {
+                result.then(result => {
+                    res.json(result)
+                    next();
+                }).catch(error => {
+                    next(error);
+                })
+                return;
+            }
+            
+            if (result !== null && result !== undefined) {
+                res.json(result);
+            } else {
+                res.status(500).json({
+                    code:"NoResult",
+                    message: "Empty result.",
+                    result: {}
+                });
+            }
+            next();
+        };
+        
+        const app = (this.app as any);
+        const rr = router.route;
+        
+        app[router.method](rr, router.befores, handle, router.afters)
+    }
+    
     loadRoutes(){
-        Routes.forEach(route => {
-            const handle = (req: express.Request, res: express.Response, next: NextFunction) => {
-                let result = null;               
-                
-                if(typeof route.action === 'string') {
-                    const ctrlr = IocContext.DefaultInstance.get((route as Router).controller);
-                    result = ctrlr[route.action](req, res, next);
-                } else {
-                    result = route.action(req, res, next);
-                }
-                
-                if (result instanceof Promise) {
-                    result.then(result => {
-                        res.json(result)
-                        next();
-                    }).catch(error => {
-                        next(error);
-                    })
-                    return;
-                }
-                
-                if (result !== null && result !== undefined) {
-                    res.json(result);
-                } else {
-                    res.status(500).json({
-                        code:"NoResult",
-                        message: "Empty result.",
-                        result: {}
-                    });
-                }
-                next();
-            };
-            
-            const app = (this.app as any);
-            const rr = route.route;
-            
-            if(route.befores && route.befores.length > 0) 
-                app.use(rr, route.befores);    
-            app[route.method](rr, handle)
-            if(route.afters && route.afters.length > 0) 
-                app.use(rr, route.afters);
-                
+
+        Routes.forEach(router => {
+            this.routerInit(router);
         });
+    
+        RouteGroups.forEach( routeGrous => {
+            const routeGroup = IocContext.DefaultInstance.get(routeGrous) as RouterGroup;
+            routeGroup.getRouterGroups().forEach(router => {
+                this.routerInit(router);
+            });
+        })
     }
 
     loadErrorHandler(){

@@ -4,7 +4,7 @@ import { injectable } from "power-di";
 @injectable()
 export default class HelloController {
 
-    helloworld(request: Request, response: Response, next: NextFunction) {
+    helloworld(req: Request, res: Response, next: NextFunction) {
 
         return {
             code: 20000,
