@@ -1,10 +1,8 @@
 import { Router, RouterGroup } from '@recordot/http-core'
-import DevAuthGroup from './groups/develop/DevAuthGroup'
-import ServiceGroup from './groups/ServiceGroup'
+import HelloworldGroup from './groups/HelloWorld'
 
 export const Routes:Array<Router> = [
-    // ... HelloworldGroup,
-    ... DevAuthGroup,
+    ... HelloworldGroup,
     // {
     //     route:'authenticateW'
     // }
@@ -12,5 +10,5 @@ export const Routes:Array<Router> = [
 ]
 
 export const RouteGroups: Array<{new (...args: any[]): RouterGroup;}> = [
-    ServiceGroup
+    
 ]
