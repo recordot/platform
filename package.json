@@ -30,6 +30,8 @@
     "express-bearer-token": "^2.4.0",
     "js-sha512": "^0.8.0",
     "jsonwebtoken": "^8.5.1",
+    "log4js": "^6.3.0",
+    "log4js-json-layout": "^2.2.2",
     "mysql": "^2.18.1",
     "object-key-validator": "^1.1.2",
     "power-di": "^2.3.10",

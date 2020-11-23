@@ -8,3 +8,4 @@ coverage
 
 /envs/local/db
 /coverage
+/logs/**/*.log
