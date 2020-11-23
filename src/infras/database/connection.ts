@@ -3,8 +3,6 @@ import { createConnection, getConnectionOptions, getConnection, getManager, Enti
 function getName() {
   let name = "default";
   
-  console.log(process.env.NODE_ENV);
-  
   if (process.env.NODE_ENV) {
     name = process.env.NODE_ENV;
   } 
@@ -15,7 +13,7 @@ function getName() {
 export const connect = async () => {
   
   const name = getName();
-
+  console.log(`orm connection is ${name}`);
   const connectionOptions = await getConnectionOptions(name);
   // await createConnection({ ...connectionOptions, name: "default" });
   await createConnection({ ...connectionOptions});
