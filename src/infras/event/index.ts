@@ -1,26 +1,23 @@
 import { IocContext } from "power-di";
-import async from 'async';
 import { Event } from "./contracts";
 import { HELLO_EVENT, helloHandle } from "./events/HelloEvent";
+import EventEmitter from "promise-events";
 
-export const fire = (event: Event) => {
+export const fire = async (event: Event) => {
 
     const env = process.env.NODE_ENV
+    const emitter = IocContext.DefaultInstance.get('EventEmitter');
+    
     if (env === 'test' || env === 'develop') {
-        const emitter = IocContext.DefaultInstance.get('EventEmitter');
-        emitter.emit(event.name, event);
+        await emitter.emit(event.name, event);
     } else {
-        const queue = async.queue( (event:Event) => {
-            const emitter = IocContext.DefaultInstance.get('EventEmitter');
-            emitter.emit(event.name, event);
-        }, 1);
-        queue.push(event);    
+        emitter.emit(event.name, event);
     }
     
 }
 
 export const loadEventListeners = () => {
-    const emitter = IocContext.DefaultInstance.get('EventEmitter');
+    const emitter = IocContext.DefaultInstance.get(EventEmitter);
     emitter.on(HELLO_EVENT,helloHandle);
 }
 

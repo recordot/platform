@@ -1,11 +1,11 @@
 import { HELLO_EVENT } from '@infras/event/events/HelloEvent';
 
-export type Events = 'event' | typeof HELLO_EVENT ;
-
-export abstract class Event {
-    name: Events = 'event';
-    data: any;
-    by?: {[key:string]:unknown};
+export interface Event {
+    /**
+     * 이벤트 이름
+     */
+    name: string;
+    [key:string]: any;
 }
 
 export abstract class Handler {
