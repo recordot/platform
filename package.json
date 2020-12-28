@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "[ -f \".env\" ] || cp .env.example .env && [ -f \"ormconfig.ts\" ] || cp ormconfig.example.ts ormconfig.ts",
-    "start": "ts-node -r tsconfig-paths/register src/www.ts",
+    "start": "ts-node-dev -r tsconfig-paths/register src/www.ts",
     "start:prod": "ts-node -r tsconfig-paths/register src/www.ts",
     "build": "tsc",
     "test": "npm run test:jest && npm run test:newman",
