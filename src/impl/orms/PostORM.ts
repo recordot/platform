@@ -1,6 +1,5 @@
 import Post from "@app/domains/Post/entities/Post";
-import { type } from "os";
-import { BeforeInsert, Column, Entity, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({name:'posts'})
 export default class PostORM {
