@@ -2,7 +2,7 @@ import { Event } from "@infras/event/contracts";
 
 export const HELLO_EVENT  = 'hello.world';
 
-export default class HelloEvent extends Event {
+export default class HelloEvent implements Event {
     name = HELLO_EVENT;
 }
 

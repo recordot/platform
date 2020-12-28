@@ -5,12 +5,14 @@ import { CommonError } from "@app/errors";
 import { RequestHandlerParams } from 'express-serve-static-core'
 import { fire } from "@infras/event";
 import HelloEvent from "@infras/event/events/HelloEvent";
+import { injectable } from "power-di";
 
 const emptyFunc = (request: Request, response: Response, next: NextFunction): any => {
     next();
 };
 
-export default new (class extends RouterGroup {
+@injectable()
+export default class HelloGroup extends RouterGroup {
     
     befores: RequestHandlerParams[] = [emptyFunc];
     afters: RequestHandlerParams[] = [emptyFunc];
@@ -73,5 +75,5 @@ export default new (class extends RouterGroup {
             }
         },
     ]
-})().getRouterGroups();
+}
     

@@ -10,7 +10,7 @@ export default function loadContainer(){
     const context = IocContext.DefaultInstance;
 
     // 필수 로드
-    context.register(EventEmitter, EventEmitter);
+    context.register(EventEmitter, 'EventEmitter');
     context.register(new AccessControl(acl), AccessControl);
     context.register(IssueToken, IIssueToken)
     log4js.addLayout('json', require('log4js-json-layout'));

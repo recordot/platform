@@ -1,7 +1,6 @@
 import { IocContext } from "power-di";
 import { Event } from "./contracts";
 import { HELLO_EVENT, helloHandle } from "./events/HelloEvent";
-import EventEmitter from "promise-events";
 
 export const fire = async (event: Event) => {
 
@@ -17,7 +16,7 @@ export const fire = async (event: Event) => {
 }
 
 export const loadEventListeners = () => {
-    const emitter = IocContext.DefaultInstance.get(EventEmitter);
+    const emitter = IocContext.DefaultInstance.get('EventEmitter');
     emitter.on(HELLO_EVENT,helloHandle);
 }
 
