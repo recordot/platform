@@ -20,6 +20,7 @@
   "dependencies": {
     "@recordot/http-core": "^1.0.0-rc3",
     "@types/jsonwebtoken": "^8.5.0",
+    "ajv": "^7.0.2",
     "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "cloneable-ts": "^1.0.18",
