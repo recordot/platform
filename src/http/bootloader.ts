@@ -2,7 +2,7 @@ import * as express from 'express';
 import * as bodyParser from "body-parser";
 import Middlewares from "./middlewares"
 import {Routes, RouteGroups} from "./routes";
-import ErrorHandlers from "./errors/handlers";
+import ErrorHandlers, { notFoundHandler } from "./errors/handlers";
 import {connect as connectDB, close as closeDB } from "@infras/database/connection"
 import { NextFunction } from 'express';
 import dotenv from 'dotenv'
@@ -95,6 +95,9 @@ export class Bootloader {
                 this.routerInit(router);
             });
         })
+
+        // 마지막 까지 라우팅 되지 않는다면 Not Found 처리
+        this.app.use(notFoundHandler.handle);
     }
 
     loadErrorHandler(){

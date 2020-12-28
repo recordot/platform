@@ -2,6 +2,21 @@ import { NextFunction, Request, Response } from 'express';
 import { CommonError } from '@app/errors';
 import { ErrorHandler } from "@recordot/http-core";
 
+export const notFoundHandler:ErrorHandler = {
+    handle:(req:Request, res:Response, next:NextFunction):any => {
+        
+        if(!res.headersSent){
+            res.status(404).json({
+                code: 404001,
+                message: "Not Found",
+                result: {},
+            });
+        }
+        
+        next();
+    }
+}
+
 let commonErrorHandler:ErrorHandler = {
     handle:(err:Error,req:Request, res:Response, next:NextFunction):any => {
         // let code = 40000;
