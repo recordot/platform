@@ -33,7 +33,9 @@ export default function validate(value: unknown): CreateReqBody {
     return value;
   } else {
     throw new Error(
-      ajv.errorsText(isCreateReqBody.errors!.filter((e: any) => e.keyword !== 'if'), {dataVar: 'Body'})
+      ajv.errorsText(isCreateReqBody.errors!.filter((e: any) => e.keyword !== 'if'), {dataVar: 'CreateReqBody'}) +
+      '\n\n' +
+      inspect(value),
     );
   }
 }
