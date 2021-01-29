@@ -19,10 +19,10 @@ import loadContainer, { clearContainer } from "@infras/comtainers/loadContainer"
         environment: require(__dirname+'/env.json'),
         reporters: 'cli',
         iterationCount: 4,
-      },(err,summary) => {
+      },async (err,summary) => {
         
         clearContainer();
-        bootloader.down();
+        await bootloader.down();
 
         server.close(() => {
           if(err || summary.run.failures.length > 0){

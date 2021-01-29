@@ -9,9 +9,12 @@ const connectionOptions: ConnectionOptions[] = [
         type: "sqljs",
         logging:true,
         synchronize: true,
-        dropSchema: true, // Isolate each test case
+        dropSchema: true,
         entities,
-        migrations: ["src/infras/database/seed/dev/**/*.ts"],
+        migrations: [
+            // seed만 함
+            "src/infras/database/migration/seeds/**/*.ts"
+        ],
     },
     // 로컬 환경에서 개발 ...
     {
@@ -20,12 +23,16 @@ const connectionOptions: ConnectionOptions[] = [
         database: "db.sqlite3",
         logging: true,
         synchronize: true,
-        dropSchema: true, // 데이터 초기화
-        entities,
-        migrations: ["src/infras/database/seed/dev/**/*.ts"],
+        dropSchema: false,
+        migrations: [
+            // seed만 함
+            "src/infras/database/migration/seeds/**/*.ts"
+        ],
+        entities
     },
+    // develop
     {
-        name: "stage",
+        name: "develop",
         type: process.env.DB_TYPE as any,
         database: process.env.DB_NAME,
         synchronize: false,
@@ -37,15 +44,16 @@ const connectionOptions: ConnectionOptions[] = [
         password: process.env.DB_PASSWORD,
         entities,
         migrations: [
-            "src/infras/database/migration/**/*.ts",
-            "src/infras/database/seed/stg/**/*.ts"
+            // seed 와 migration 모두를..
+            "src/infras/database/migration/**/*.ts"
         ],
         cli: {
             migrationsDir: "src/infras/database/migration"
         }
-    },
+    }, 
+    // default
     {
-        name: "production",
+        name: "default",
         type: process.env.DB_TYPE as any,
         database: process.env.DB_NAME,
         synchronize: false,
@@ -57,8 +65,8 @@ const connectionOptions: ConnectionOptions[] = [
         password: process.env.DB_PASSWORD,
         entities,
         migrations: [
-            "src/infras/database/migration/**/*.ts",
-            "src/infras/database/seed/prod/**/*.ts"
+            // seed 와 migration 모두를..
+            "src/infras/database/migration/**/*.ts"
         ],
         cli: {
             migrationsDir: "src/infras/database/migration"
