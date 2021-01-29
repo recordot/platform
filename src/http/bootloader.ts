@@ -69,7 +69,7 @@ export class Bootloader {
                 res.json(result);
             } else {
                 res.status(500).json({
-                    code:"NoResult",
+                    code: 400001,
                     message: "Empty result.",
                     result: {}
                 });
@@ -80,7 +80,12 @@ export class Bootloader {
         const app = (this.app as any);
         const rr = router.route;
         
-        app[router.method](rr, router.befores, handle, router.afters)
+        app[router.method](
+            rr,
+            router.befores||[],
+            handle,
+            router.afters||[]
+        )
     }
     
     loadRoutes(){

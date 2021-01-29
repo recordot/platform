@@ -19,7 +19,6 @@ export default class PostORM {
         post.id = this.id;
         post.title = this.title;
         post.content = this.content;
-        
 
         return post;
     }

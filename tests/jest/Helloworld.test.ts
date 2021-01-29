@@ -32,7 +32,7 @@ test('get hello-world APIs', async () => {
 
     res = await app.get(`/hello-world/tests/return-nothing`);
     expect(res.status).toEqual(500);
-    expect(res.body.code).toEqual("NoResult");
+    expect(res.body.code).toEqual(400001);
     expect(res.body.message).toEqual("Empty result.");
     
 });
