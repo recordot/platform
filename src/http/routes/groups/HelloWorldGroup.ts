@@ -12,10 +12,10 @@ const emptyFunc = (request: Request, response: Response, next: NextFunction): an
 };
 
 @injectable()
-export default class HelloGroup extends RouterGroup {
+export default class HelloWorldGroup extends RouterGroup {
     
-    befores: RequestHandlerParams[] = [emptyFunc];
-    afters: RequestHandlerParams[] = [emptyFunc];
+    defaultBefores: RequestHandlerParams[] = [emptyFunc];
+    defaultAfters: RequestHandlerParams[] = [emptyFunc];
 
     groups:Router[] = [
         {
