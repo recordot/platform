@@ -5,9 +5,9 @@ export interface Event {
      * 이벤트 이름
      */
     name: string;
-    [key:string]: any;
+    [key: string]: any;
 }
 
 export abstract class Handler {
-    abstract handle(event:Event): void;
+    abstract handle(event: Event): void;
 }
