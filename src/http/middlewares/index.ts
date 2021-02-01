@@ -1,18 +1,18 @@
 import { NextFunction, Request, Response } from 'express';
 import { Middelware } from '@recordot/http-core';
 
-let everyRequest:Middelware =  {
-    handle:(req:Request, res:Response, next:NextFunction):any => {next()}
-}
+const everyRequest: Middelware = {
+    handle: (req: Request, res: Response, next: NextFunction): any => { next(); },
+};
 
-let helloReqeust:Middelware =  {
-    route:'/hello-world*',
-    handle:(req:Request, res:Response, next:NextFunction):any => {next()}
-}
+const helloReqeust: Middelware = {
+    route: '/hello-world*',
+    handle: (req: Request, res: Response, next: NextFunction): any => { next(); },
+};
 
-const Middlewares:Array<Middelware> = [
+const Middlewares: Middelware[] = [
     everyRequest,
-    helloReqeust
-]
+    helloReqeust,
+];
 
-export default Middlewares
+export default Middlewares;

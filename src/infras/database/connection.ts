@@ -2,16 +2,16 @@ import { createConnection, getConnectionOptions, getConnection, getManager, Enti
 
 function getConnectionName() {
   let name = "default";
-  
+
   if (process.env.NODE_ENV) {
     name = process.env.NODE_ENV;
-  } 
+  }
   console.log(name);
   return name;
 }
 
 export const connect = async () => {
-  
+
   const name = getConnectionName();
 
   let connectionOptions;
@@ -25,9 +25,9 @@ export const connect = async () => {
       connectionOptions = await getConnectionOptions();
       break;
   }
-  
-  const conn = await createConnection({ ...connectionOptions});
-  
+
+  const conn = await createConnection({ ...connectionOptions });
+
   /**
    * qa, stg, prod, beta 등은 매뉴얼리....
    */
@@ -35,18 +35,18 @@ export const connect = async () => {
     case "test":
     case "local":
     case "develop":
-      console.log(`${name} migraion starting...` );
+      console.log(`${name} migraion starting...`);
       await conn.runMigrations();
       break;
   }
 };
 
-export const manager = ():EntityManager => {
+export const manager = (): EntityManager => {
   const name = getConnectionName();
   return getManager(name);
-}
+};
 
 export const close = async () => {
   const name = getConnectionName();
-  await getConnection(name).close(); 
+  await getConnection(name).close();
 };

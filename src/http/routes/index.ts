@@ -1,19 +1,17 @@
-import { buildResponse, Router, RouterGroup } from '@recordot/http-core'
+import { buildResponse, Router, RouterGroup } from '@recordot/http-core';
 import { NextFunction, Request, Response } from 'express';
-import HelloworldGroup from './groups/HelloWorldGroup'
-import PostGroup from './groups/PostGroup'
+import HelloworldGroup from './groups/HelloWorldGroup';
 
-export const Routes:Array<Router> = [
+export const Routes: Router[] = [
     {
         method: 'get',
         route: "healthy",
         action: (request: Request, response: Response, next: NextFunction) => {
-            return buildResponse({message: "ok"});
-        }
-    }
+            return buildResponse({ message: "ok" });
+        },
+    },
 ];
 
-export const RouteGroups: Array<{new (...args: any[]): RouterGroup;}> = [
+export const RouteGroups: (new (...args: any[]) => RouterGroup)[] = [
     HelloworldGroup,
-    PostGroup,
 ];
