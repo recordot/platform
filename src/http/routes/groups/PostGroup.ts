@@ -4,7 +4,6 @@ import { injectable } from "power-di";
 
 @injectable()
 export default class PostGroup extends RouterGroup {
-    
 
     groups:Router[] = [
         {
@@ -12,7 +11,12 @@ export default class PostGroup extends RouterGroup {
             route: "/posts",
             controller: PostController,
             action: 'create',
+        },
+        {
+            method: "patch",
+            route: "/posts/:id",
+            controller: PostController,
+            action: 'patch',
         }
     ]
 }
-    
